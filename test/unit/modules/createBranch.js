@@ -1,19 +1,11 @@
-/**
- * augur.js tests
- * @author Jack Peterson (jack@tinybike.net)
- */
-
-"use strict";
-
 var assert = require("chai").assert;
-var augur = require("../../src");
-var random = require("../random");
-var tools = require("../tools");
+var augur = require("../../../src");
+var random = require("../../random");
+var tools = require("../../tools");
 
 var noop = function () {};
-// Whole page could be moved to unit tests...
 
-describe("Unit tests", function () {
+describe("Unit tests - createBranch", function () {
     describe("createBranch", function () {
         var test = function (params) {
             var count = 0;

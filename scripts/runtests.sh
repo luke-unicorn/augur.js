@@ -26,6 +26,7 @@ create=0
 markets=0
 reporting=0
 trading=0
+unit=0
 
 for arg in "$@"; do
     shift
@@ -37,11 +38,12 @@ for arg in "$@"; do
         "--reporting") set -- "$@" "-s" ;;
         "--trading") set -- "$@" "-l" ;;
         "--spec") set -- "$@" "-k" ;;
+				"--unit") set -- "$@" "-u" ;;
         *) set -- "$@" "$arg"
     esac
 done
 OPTIND=1
-while getopts "gvocrmslk" opt; do
+while getopts "gvocrmslku" opt; do
     case "$opt" in
         g) gospel="--gospel" ;;
         v) coverage=1 ;;
@@ -51,6 +53,7 @@ while getopts "gvocrmslk" opt; do
         s) reporting=1 ;;
         l) trading=1 ;;
         k) reporter="spec" ;;
+				u) unit=1 ;;
     esac
 done
 shift $(expr $OPTIND - 1)
@@ -64,5 +67,6 @@ echo -e "+${GRAY}================${NC}+\n"
 [ "${core}" == "1" ] && runtest "core"
 [ "${trading}" == "1" ] && runtest "trading"
 [ "${reporting}" == "1" ] && runtest "reporting"
+[ "${unit}" == "1" ] && runtest "unit"
 
 echo
